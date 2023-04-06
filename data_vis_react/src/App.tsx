@@ -1,13 +1,8 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-export type UserAnswer = {
-  text_answer: string | null;
-  slider_answer: number | null;
-  numeric_answer: number | null;
-  timestamp: string;
-};
+import UserAnswersSummary from './components/UserAnswersSummary';
+import { UserAnswer } from './types/Types';
 
 function App() {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[] | null>();
@@ -19,7 +14,7 @@ function App() {
     });
   }, []);
   return <div className="App">{userAnswers ? userAnswers.map((userAnswer) => {
-    return <p>{userAnswer.timestamp + ", " + userAnswer.text_answer + ", " + userAnswer.slider_answer + ", " + userAnswer.numeric_answer}</p>
+    return <UserAnswersSummary userAnswer={userAnswer} />;
   }) : null}</div>;
 
 }
