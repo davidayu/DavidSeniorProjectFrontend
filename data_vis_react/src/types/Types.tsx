@@ -3,4 +3,6 @@ export type UserAnswer = {
     slider_answer: number | null;
     numeric_answer: number | null;
     timestamp: string;
+    user: string;
+    question: number;
   };
