@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import UserAnswersSummary from './components/UserAnswersSummary';
 import { UserAnswer } from './types/Types';
+import SliderAnswerGraph from './components/SliderAnswerGraph';
 
 function App() {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[] | null>();
@@ -13,9 +14,13 @@ function App() {
       setUserAnswers(response.data);
     });
   }, []);
+  /*
   return <div className="App">{userAnswers ? userAnswers.map((userAnswer) => {
     return <UserAnswersSummary userAnswer={userAnswer} />;
   }) : null}</div>;
+  */
+
+  return <div className="App">{userAnswers ? <SliderAnswerGraph userAnswers={userAnswers} /> : null}</div>;
 
 }
 
