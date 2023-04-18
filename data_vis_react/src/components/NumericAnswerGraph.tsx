@@ -19,19 +19,19 @@ ChartJS.register(
     Title
 )
 
-interface SliderAnswerGraphProps {
+interface NumericAnswerGraphProps {
     userAnswers: UserAnswer[];
 }
 
-export default function SliderAnswerGraph({userAnswers}: SliderAnswerGraphProps) {
+export default function NumericAnswerGraph({userAnswers}: NumericAnswerGraphProps) {
     const timestamps = userAnswers.map((answer) => answer.timestamp);
-    const sliderAnswers = userAnswers.map((answer) => answer.slider_answer);
+    const numericAnswers = userAnswers.map((answer) => answer.numeric_answer);
     const data = {
         labels: timestamps,
         datasets: [
           {
-            label: 'Slider Answers',
-            data: sliderAnswers,
+            label: 'Numeric Answers',
+            data: numericAnswers,
             backgroundColor: 'aqua',
             borderColor: 'black',
             pointBorderColor: 'aqua',
@@ -51,9 +51,9 @@ export default function SliderAnswerGraph({userAnswers}: SliderAnswerGraphProps)
         });
     }, []);
     
-    const filteredSliderAnswers = sliderAnswers.filter(answer => answer !== null) as number[];
-    const minSliderAnswer = Math.floor(Math.min(...filteredSliderAnswers) / 10) * 10;
-    const maxSliderAnswer = Math.ceil(Math.max(...filteredSliderAnswers) / 10) * 10;
+    const filteredNumericAnswers = numericAnswers.filter(answer => answer !== null) as number[];
+    const minNumericAnswer = Math.floor(Math.min(...filteredNumericAnswers) / 10) * 10;
+    const maxNumericAnswer = Math.ceil(Math.max(...filteredNumericAnswers) / 10) * 10;
 
     const options = {
         plugins: {
@@ -67,8 +67,8 @@ export default function SliderAnswerGraph({userAnswers}: SliderAnswerGraphProps)
         },
         scales: {
             y: {
-                min: minSliderAnswer,
-                max: maxSliderAnswer
+                min: minNumericAnswer,
+                max: maxNumericAnswer
             }
         },
     };
@@ -82,7 +82,7 @@ export default function SliderAnswerGraph({userAnswers}: SliderAnswerGraphProps)
 /*
 Call using
 
-return <div className="App">{userAnswers ? <SliderAnswerGraph userAnswers={userAnswers} /> : null}</div>;
+return <div className="App">{userAnswers ? <NumericAnswerGraph userAnswers={userAnswers} /> : null}</div>;
 
 in App.tsx
 */
