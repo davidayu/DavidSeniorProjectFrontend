@@ -24,9 +24,6 @@ interface PathFeedbackGraphProps {
 }
 
 export default function PathFeedbackGraph({pathFeedbacks}: PathFeedbackGraphProps) {
-    //const ratings = pathFeedbacks.map((answer) => answer.rating);
-
-    //const conciseTimestamps = pathFeedbacks.map((answer) => answer.timestamp.substring(0, 7));
     
     const groupedData: { [key: string]: number[] } = pathFeedbacks.reduce((acc, answer) => {
         const conciseTimestamp = answer.timestamp.substring(0, 7);
@@ -61,19 +58,6 @@ export default function PathFeedbackGraph({pathFeedbacks}: PathFeedbackGraphProp
           },
         ],
     };
-
-    // modify for path title
-    /*
-    const [questionText, setQuestionText] = useState<string>();
-
-    useEffect(() => {
-        const url = 'http://127.0.0.1:8000/question_text/' + userAnswers[0].question + '/';
-        axios.get(url).then((response) => {
-            console.log(response);
-            setQuestionText(response.data.text);
-        });
-    }, []);
-    */
 
     const options = {
         plugins: {

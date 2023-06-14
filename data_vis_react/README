@@ -1,0 +1,75 @@
+Original project backend link: https://github.com/davidayu/TreesDataVisBackend/tree/main/data_vis_drf
+Original project frontend link: https://github.com/davidayu/TreesDataVisFrontend/tree/main/data_vis_react 
+
+This React typescript project contains components used to visualize
+
+Filtered average score: Trees.app collects student data by asking them questions and giving students recommendations based on the answers to their questions. The students complete the recommendations and then answer the same questions afterwards. We want to visualize how students’ answers change after completing their recommended tasks and view the data in a line graph.
+
+Plan ratings and edits over time: Trees.app provides recommendations to students based on their questionnaire data. Students can then provide feedback on particular plans by giving them a rating of 1-5 stars. To better understand what is/isn’t working, we want to visualize how the score of plans change as we edit them. We also want to be able to revert to older versions of plans if they have a higher rating.
+
+This project also contains example code in App.tsx to call the APIs necessary to display the components.
+
+
+Notes:
+- The backend code has to be running for this project to work
+- For each of the visualizations, what goes inside function App() {} differs. Here I specify how to define the function depending on what visualization you want.
+
+Filtered average score visualization:
+
+    function App implementation:
+
+        function App() {
+            const [userAnswers, setUserAnswers] = useState<UserAnswer[] | null>();
+
+            useEffect(() => {
+                const url = ____________________;
+                axios.get(url).then((response) => {
+                setUserAnswers(response.data);
+                });
+            }, []);
+            
+            return __________________;
+        }
+
+        Note that in this function, url changes depending on what API we want to call. Depending on what type of visualization this is, the return statement also changes. I will go into more detail in the Components section. 
+
+    For filtered average score, there are three components. Because user scores can be formatted in three different ways (numeric, slider, text), I created one component for each type of visualization.
+
+    Components:
+
+        NumericAnswerGraph:
+            example url: const url = 'http://127.0.0.1:8000/questionnaire_user_answers/1/72/'; 
+            example return: return <div className="App">{userAnswers ? <NumericAnswerGraph userAnswers={userAnswers} /> : null}</div>;
+
+        SliderAnswerGraph:
+            example url: const url = 'http://127.0.0.1:8000/questionnaire_user_answers/36/72/';
+            example return: return <div className="App">{userAnswers ? <SliderAnswerGraph userAnswers={userAnswers} /> : null}</div>;
+
+        TextAnswerTable:
+            example url: const url = 'http://127.0.0.1:8000/questionnaire_user_answers/85/350/';
+            example return: return <div className="App">{userAnswers ? <TextAnswerTable userAnswers={userAnswers} /> : null}</div>;
+
+Plan ratings and edits over time:
+
+    function App implementation:
+
+        function App() {
+            const [pathFeedbacks, setPathFeedbacks] = useState<PathFeedback[] | null>();
+
+            useEffect(() => {
+                const url = 'http://127.0.0.1:8000/path_feedback/123/'
+                axios.get(url).then((response) => {
+                setPathFeedbacks(response.data);
+                });
+            }, []);
+            
+            return <div className="App">{pathFeedbacks ? <PathFeedbackGraph pathFeedbacks={pathFeedbacks} /> : null}</div>;  
+        }
+
+    Components:
+
+        PathFeedbackGraph:
+            note: This component averages every rating for a path by month. 
+
+
+            

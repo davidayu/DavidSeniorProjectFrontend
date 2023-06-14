@@ -1,7 +1,6 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import UserAnswersSummary from './components/UserAnswersSummary';
 import { UserAnswer, PathFeedback } from './types/Types';
 import SliderAnswerGraph from './components/SliderAnswerGraph';
 import NumericAnswerGraph from './components/NumericAnswerGraph';
@@ -22,11 +21,7 @@ function App() {
       setPathFeedbacks(response.data);
     });
   }, []);
-  /*
-  return <div className="App">{userAnswers ? userAnswers.map((userAnswer) => {
-    return <UserAnswersSummary userAnswer={userAnswer} />;
-  }) : null}</div>;
-  */
+  
   /*
   return <div className="App">{userAnswers ? <SliderAnswerGraph userAnswers={userAnswers} /> : null}</div>;
   */
@@ -36,7 +31,9 @@ function App() {
   /*
   return <div className="App">{userAnswers ? <TextAnswerTable userAnswers={userAnswers} /> : null}</div>;
   */
+  
   return <div className="App">{pathFeedbacks ? <PathFeedbackGraph pathFeedbacks={pathFeedbacks} /> : null}</div>;
+  
 }
 
 export default App;
